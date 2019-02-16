@@ -1,6 +1,37 @@
 html {
   body {
     background-color: cornsilk;
+    margin: 0;
   }
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.board {
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  place-items: stretch;
+}
+
+.cell {
+  background-color: white;
+  border: 1px black solid;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.value {
+  font-size: 2em;
+}
