@@ -34,4 +34,7 @@ html {
 
 .value {
   font-size: 2em;
+  &.input {
+    color: gray;
+  }
 }
