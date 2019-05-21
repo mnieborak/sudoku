@@ -1,17 +1,21 @@
 import React from "react";
 
-import { useBoard } from "./sudoku";
+import { useBoard, useSelection } from "./sudoku";
 import Board from "./Board";
 
 const App = () => {
-  const [cells, { updateCell }] = useBoard({
-    board: [[1, 0, 0, 2], [4, 0, 3]],
-    fixed: true
-  });
+  const [cells, { updateCell }] = useBoard();
+  const [{ cell }, { selectCell, moveSelect }] = useSelection();
   return (
     <div className="app">
       <h1>Sudoku</h1>
-      <Board cells={cells} updateCell={updateCell} />
+      <Board
+        cells={cells}
+        selectedCellId={cell}
+        selectCell={selectCell}
+        updateCell={updateCell}
+        moveSelect={moveSelect}
+      />
     </div>
   );
 };

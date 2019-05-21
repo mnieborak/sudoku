@@ -30,6 +30,19 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+  &:nth-child(3n):not(:nth-child(9n)) {
+    border-right: 2px solid #000;
+  }
+  &:nth-child(n + 19):nth-child(-n + 27) {
+    border-bottom: 2px solid #000;
+  }
+  &:nth-child(n + 46):nth-child(-n + 54) {
+    border-bottom: 2px solid #000;
+  }
+  &.selected {
+    background-color: lightblue;
+  }
 }
 
 .value {

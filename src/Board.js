@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 
 import Cell from "./Cell";
 
-const Board = ({ cells, updateCell }) => (
+const Board = ({
+  cells,
+  selectedCellId,
+  updateCell,
+  selectCell,
+  moveSelect
+}) => (
   <div className="board">
     {Object.entries(cells).map(([id, { value, clue }], index) => (
       <Cell
@@ -11,8 +17,11 @@ const Board = ({ cells, updateCell }) => (
         id={id}
         value={value}
         fixed={clue}
+        selected={selectedCellId === id}
+        selectCell={selectCell}
         updateCell={updateCell}
-        tabIndex={index}
+        moveSelect={moveSelect}
+        tabIndex={index + 1}
       />
     ))}
   </div>
@@ -20,6 +29,9 @@ const Board = ({ cells, updateCell }) => (
 
 Board.propTypes = {
   cells: PropTypes.object,
+  selectedCellId: PropTypes.string,
+  selectCell: PropTypes.func.isRequired,
+  moveSelect: PropTypes.func.isRequired,
   updateCell: PropTypes.func.isRequired
 };
 

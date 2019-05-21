@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   module: {
@@ -12,15 +12,9 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-            "style-loader",
-            "css-loader",
-            "sass-loader"
-        ]
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin()
-  ]
+  plugins: [new HtmlWebpackPlugin()]
 };
