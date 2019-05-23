@@ -29,6 +29,9 @@ class Cell extends PureComponent {
   handleKeyDown = ev => {
     const { moveSelect } = this.props;
     switch (ev.key) {
+      case " ":
+      case "Backspace":
+        return this.handleValueInput(null);
       case "q":
       case "1":
         return this.handleValueInput(1);
@@ -69,7 +72,7 @@ class Cell extends PureComponent {
 
   handleValueInput = newValue => {
     const { fixed, id, updateCell, value } = this.props;
-    if (!fixed && newValue) {
+    if (!fixed) {
       updateCell(id, { value: newValue === value ? null : newValue });
     }
   };
