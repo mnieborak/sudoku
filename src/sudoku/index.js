@@ -1,4 +1,4 @@
-import { useReducer, useMemo } from "react";
+import { useReducer, useMemo, useState } from "react";
 
 // Board
 const initializeBoard = (prefill, fixed = true) => {
@@ -16,17 +16,45 @@ const initializeBoard = (prefill, fixed = true) => {
 };
 
 const UPDATE_CELL = "UPDATE_CELL";
+const CLEAR_BOARD = "CLEAR_BOARD";
+const RESET_BOARD = "RESET_BOARD";
+const FIX_BOARD = "FIX_BOARD";
+const UNFIX_BOARD = "UNFIX_BOARD";
 
 const boardReducer = (state, action) => {
   switch (action.type) {
     case UPDATE_CELL:
       return { ...state, [action.id]: { ...state[action.id], ...action.cell } };
+    case CLEAR_BOARD:
+      return Object.keys(state).reduce((board, id) => {
+        board[id] = { value: null, clue: false };
+        return board;
+      }, {});
+    case RESET_BOARD:
+      return Object.entries(state).reduce((board, [id, cell]) => {
+        board[id] = cell.clue ? cell : { value: null, clue: false };
+        return board;
+      }, {});
+    case FIX_BOARD:
+      return Object.entries(state).reduce((board, [id, cell]) => {
+        board[id] = cell.value ? { ...cell, clue: true } : cell;
+        return board;
+      }, {});
+    case UNFIX_BOARD:
+      return Object.entries(state).reduce((board, [id, cell]) => {
+        board[id] = cell.clue ? { ...cell, clue: false } : cell;
+        return board;
+      }, {});
     default:
       return state;
   }
 };
 
 const updateCell = (id, cell) => ({ type: UPDATE_CELL, id, cell });
+const clearBoard = () => ({ type: CLEAR_BOARD });
+const resetBoard = () => ({ type: RESET_BOARD });
+const fixBoard = () => ({ type: FIX_BOARD });
+const unfixBoard = () => ({ type: UNFIX_BOARD });
 
 export const useBoard = ({ board, fixed = true } = {}) => {
   const [cells, dispatch] = useReducer(boardReducer, board, b =>
@@ -34,9 +62,13 @@ export const useBoard = ({ board, fixed = true } = {}) => {
   );
   const actions = useMemo(
     () => ({
-      updateCell: (id, cell) => dispatch(updateCell(id, cell))
+      updateCell: (id, cell) => dispatch(updateCell(id, cell)),
+      clearBoard: () => dispatch(clearBoard()),
+      resetBoard: () => dispatch(resetBoard()),
+      fixBoard: () => dispatch(fixBoard()),
+      unfixBoard: () => dispatch(unfixBoard())
     }),
-    [dispatch, updateCell]
+    [dispatch]
   );
   return [cells, actions];
 };
@@ -87,7 +119,15 @@ export const useSelection = () => {
       selectCell: id => dispatch(selectCell(id)),
       moveSelect: type => dispatch(moveSelect(type))
     }),
-    [dispatch, selectCell]
+    [dispatch]
   );
   return [{ row, column, cell }, actions];
 };
+
+// Modes
+
+export const MODE_EDITING = "MODE_EDITING";
+export const MODE_SOLVING = "MODE_SOLVING";
+export const MODES = [MODE_EDITING, MODE_SOLVING];
+
+export const useMode = () => useState(MODE_EDITING);

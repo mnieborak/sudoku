@@ -1,11 +1,16 @@
 import React from "react";
 
-import { useBoard, useSelection } from "./sudoku";
+import { useBoard, useSelection, useMode } from "./sudoku";
 import Board from "./Board";
+import Controls from "./Controls";
 
 const App = () => {
-  const [cells, { updateCell }] = useBoard();
+  const [
+    cells,
+    { updateCell, clearBoard, resetBoard, fixBoard, unfixBoard }
+  ] = useBoard();
   const [{ cell }, { selectCell, moveSelect }] = useSelection();
+  const [mode, setMode] = useMode();
   return (
     <div className="app">
       <h1>Sudoku</h1>
@@ -15,6 +20,14 @@ const App = () => {
         selectCell={selectCell}
         updateCell={updateCell}
         moveSelect={moveSelect}
+      />
+      <Controls
+        mode={mode}
+        setMode={setMode}
+        clearBoard={clearBoard}
+        resetBoard={resetBoard}
+        fixBoard={fixBoard}
+        unfixBoard={unfixBoard}
       />
     </div>
   );
