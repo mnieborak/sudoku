@@ -8,7 +8,7 @@ const initializeBoard = (prefill, fixed = true) => {
       numbers.reduce((cells, c, j) => {
         const value = (prefill && prefill[i] && prefill[i][j]) || null;
         const clue = value ? fixed : false;
-        cells[`${r}${c}`] = { value, clue };
+        cells[`${r}${c}`] = { row: r, column: c, value, clue };
         return cells;
       }, board),
     {}
@@ -26,13 +26,13 @@ const boardReducer = (state, action) => {
     case UPDATE_CELL:
       return { ...state, [action.id]: { ...state[action.id], ...action.cell } };
     case CLEAR_BOARD:
-      return Object.keys(state).reduce((board, id) => {
-        board[id] = { value: null, clue: false };
+      return Object.entries(state).reduce((board, [id, cell]) => {
+        board[id] = { ...cell, value: null, clue: false };
         return board;
       }, {});
     case RESET_BOARD:
       return Object.entries(state).reduce((board, [id, cell]) => {
-        board[id] = cell.clue ? cell : { value: null, clue: false };
+        board[id] = cell.clue ? cell : { ...cell, value: null, clue: false };
         return board;
       }, {});
     case FIX_BOARD:

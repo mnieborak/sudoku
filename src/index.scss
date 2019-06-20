@@ -40,8 +40,11 @@ html {
   &:nth-child(n + 46):nth-child(-n + 54) {
     border-bottom: 2px solid #000;
   }
-  &.selected {
+  &.highlighted {
     background-color: lightblue;
+  }
+  &.selected {
+    background-color: lightskyblue;
   }
 }
 

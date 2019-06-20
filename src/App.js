@@ -9,14 +9,14 @@ const App = () => {
     cells,
     { updateCell, clearBoard, resetBoard, fixBoard, unfixBoard }
   ] = useBoard();
-  const [{ cell }, { selectCell, moveSelect }] = useSelection();
+  const [selection, { selectCell, moveSelect }] = useSelection();
   const [mode, setMode] = useMode();
   return (
     <div className="app">
       <h1>Sudoku</h1>
       <Board
         cells={cells}
-        selectedCellId={cell}
+        selection={selection}
         selectCell={selectCell}
         updateCell={updateCell}
         moveSelect={moveSelect}
