@@ -85,12 +85,12 @@ class Cell extends PureComponent {
   handleBlur = () => this.props.selectCell(null);
 
   render() {
-    const { value, fixed, selected, highlighted, tabIndex } = this.props;
+    const { value, fixed, selected, peer, same, tabIndex } = this.props;
 
     return (
       <div
         ref={this.focusRef}
-        className={classNames("cell", { selected, highlighted })}
+        className={classNames("cell", { selected, peer, same })}
         tabIndex={tabIndex}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
@@ -107,7 +107,8 @@ Cell.propTypes = {
   value: PropTypes.number,
   fixed: PropTypes.bool.isRequired,
   selected: PropTypes.bool.isRequired,
-  highlighted: PropTypes.bool.isRequired,
+  peer: PropTypes.bool.isRequired,
+  same: PropTypes.bool.isRequired,
   selectCell: PropTypes.func.isRequired,
   updateCell: PropTypes.func.isRequired,
   moveSelect: PropTypes.func.isRequired,
