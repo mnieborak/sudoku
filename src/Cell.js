@@ -6,7 +6,7 @@ import {
   MOVE_SELECT_UP,
   MOVE_SELECT_DOWN,
   MOVE_SELECT_LEFT,
-  MOVE_SELECT_RIGHT
+  MOVE_SELECT_RIGHT,
 } from "./sudoku";
 
 class Cell extends PureComponent {
@@ -26,7 +26,7 @@ class Cell extends PureComponent {
     }
   }
 
-  handleKeyDown = ev => {
+  handleKeyDown = (ev) => {
     const { moveSelect } = this.props;
     switch (ev.key) {
       case " ":
@@ -70,7 +70,7 @@ class Cell extends PureComponent {
     }
   };
 
-  handleValueInput = newValue => {
+  handleValueInput = (newValue) => {
     const { fixed, id, updateCell, value } = this.props;
     if (!fixed) {
       updateCell(id, { value: newValue === value ? null : newValue });
@@ -112,11 +112,11 @@ Cell.propTypes = {
   selectCell: PropTypes.func.isRequired,
   updateCell: PropTypes.func.isRequired,
   moveSelect: PropTypes.func.isRequired,
-  tabIndex: PropTypes.number.isRequired
+  tabIndex: PropTypes.number.isRequired,
 };
 
 Cell.defaultProps = {
-  value: null
+  value: null,
 };
 
 export default Cell;

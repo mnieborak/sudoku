@@ -7,7 +7,7 @@ import Controls from "./Controls";
 const App = () => {
   const [
     cells,
-    { updateCell, clearBoard, resetBoard, fixBoard, unfixBoard }
+    { updateCell, clearBoard, resetBoard, fixBoard, unfixBoard },
   ] = useBoard();
   const [selection, { selectCell, moveSelect }] = useSelection();
   const [mode, setMode] = useMode();

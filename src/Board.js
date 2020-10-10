@@ -9,7 +9,7 @@ const Board = ({
   selection: { cell: selectedCell, ...selection },
   updateCell,
   selectCell,
-  moveSelect
+  moveSelect,
 }) => {
   const selectedValue =
     (selectedCell && cells[selectedCell].value) || undefined;
@@ -39,7 +39,7 @@ Board.propTypes = {
   selection: PropTypes.object,
   selectCell: PropTypes.func.isRequired,
   moveSelect: PropTypes.func.isRequired,
-  updateCell: PropTypes.func.isRequired
+  updateCell: PropTypes.func.isRequired,
 };
 
 export default Board;

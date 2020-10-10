@@ -14,7 +14,7 @@ const SolvingControls = ({ onClickEdit, onReset }) => (
 
 SolvingControls.propTypes = {
   onClickEdit: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired
+  onReset: PropTypes.func.isRequired,
 };
 
 export default SolvingControls;

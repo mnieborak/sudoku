@@ -11,7 +11,7 @@ const Controls = ({
   fixBoard,
   unfixBoard,
   clearBoard,
-  resetBoard
+  resetBoard,
 }) => {
   const handleClickPlay = useCallback(() => {
     setMode(MODE_SOLVING);
@@ -45,7 +45,7 @@ Controls.propTypes = {
   fixBoard: PropTypes.func.isRequired,
   unfixBoard: PropTypes.func.isRequired,
   clearBoard: PropTypes.func.isRequired,
-  resetBoard: PropTypes.func.isRequired
+  resetBoard: PropTypes.func.isRequired,
 };
 
 export default Controls;

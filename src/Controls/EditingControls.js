@@ -14,7 +14,7 @@ const EditingControls = ({ onClickPlay, onClear }) => (
 
 EditingControls.propTypes = {
   onClickPlay: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired
+  onClear: PropTypes.func.isRequired,
 };
 
 export default EditingControls;

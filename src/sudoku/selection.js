@@ -1,11 +1,11 @@
 import { useReducer, useMemo } from "react";
 
-const extractRowAndColumn = id => {
-  const [row, column] = (id || "").split("").map(i => parseInt(i));
+const extractRowAndColumn = (id) => {
+  const [row, column] = (id || "").split("").map((i) => parseInt(i));
   return { row, column };
 };
-const increment = i => (i && i < 9 ? i + 1 : i);
-const decrement = i => (i && i > 1 ? i - 1 : i);
+const increment = (i) => (i && i < 9 ? i + 1 : i);
+const decrement = (i) => (i && i > 1 ? i - 1 : i);
 
 const SELECT_CELL = "SELECT_CELL";
 export const MOVE_SELECT_UP = "MOVE_SELECT_UP";
@@ -31,8 +31,8 @@ const selectionReducer = (state, action) => {
   }
 };
 
-const selectCell = id => ({ type: SELECT_CELL, id });
-const moveSelect = type => ({ type });
+const selectCell = (id) => ({ type: SELECT_CELL, id });
+const moveSelect = (type) => ({ type });
 
 export const useSelection = () => {
   const [{ row, column }, dispatch] = useReducer(
@@ -42,8 +42,8 @@ export const useSelection = () => {
   const cell = useMemo(() => `${row || ""}${column || ""}`, [row, column]);
   const actions = useMemo(
     () => ({
-      selectCell: id => dispatch(selectCell(id)),
-      moveSelect: type => dispatch(moveSelect(type))
+      selectCell: (id) => dispatch(selectCell(id)),
+      moveSelect: (type) => dispatch(moveSelect(type)),
     }),
     [dispatch]
   );

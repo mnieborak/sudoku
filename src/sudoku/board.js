@@ -56,7 +56,7 @@ const fixBoard = () => ({ type: FIX_BOARD });
 const unfixBoard = () => ({ type: UNFIX_BOARD });
 
 export const useBoard = ({ board, fixed = true } = {}) => {
-  const [cells, dispatch] = useReducer(boardReducer, board, b =>
+  const [cells, dispatch] = useReducer(boardReducer, board, (b) =>
     initializeBoard(b, fixed)
   );
   const actions = useMemo(
@@ -65,7 +65,7 @@ export const useBoard = ({ board, fixed = true } = {}) => {
       clearBoard: () => dispatch(clearBoard()),
       resetBoard: () => dispatch(resetBoard()),
       fixBoard: () => dispatch(fixBoard()),
-      unfixBoard: () => dispatch(unfixBoard())
+      unfixBoard: () => dispatch(unfixBoard()),
     }),
     [dispatch]
   );
