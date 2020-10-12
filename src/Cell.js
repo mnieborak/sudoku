@@ -30,6 +30,7 @@ class Cell extends PureComponent {
     const { moveSelect } = this.props;
     switch (ev.key) {
       case " ":
+      case "0":
       case "Backspace":
         return this.handleValueInput(null);
       case "q":
@@ -85,12 +86,20 @@ class Cell extends PureComponent {
   handleBlur = () => this.props.selectCell(null);
 
   render() {
-    const { value, fixed, selected, peer, same, tabIndex } = this.props;
+    const {
+      value,
+      fixed,
+      selected,
+      peer,
+      same,
+      conflict,
+      tabIndex,
+    } = this.props;
 
     return (
       <div
         ref={this.focusRef}
-        className={classNames("cell", { selected, peer, same })}
+        className={classNames("cell", { selected, peer, same, conflict })}
         tabIndex={tabIndex}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
@@ -112,6 +121,7 @@ Cell.propTypes = {
   selectCell: PropTypes.func.isRequired,
   updateCell: PropTypes.func.isRequired,
   moveSelect: PropTypes.func.isRequired,
+  conflict: PropTypes.bool.isRequired,
   tabIndex: PropTypes.number.isRequired,
 };
 

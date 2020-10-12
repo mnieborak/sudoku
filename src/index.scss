@@ -55,3 +55,12 @@ html {
     color: gray;
   }
 }
+
+.conflict {
+  .value {
+    color: rgb(233, 70, 41);
+  }
+  &.peer.same {
+    background-color: rgb(237, 199, 163);
+  }
+}

@@ -10,6 +10,7 @@ const Board = ({
   updateCell,
   selectCell,
   moveSelect,
+  conflicts,
 }) => {
   const selectedValue =
     (selectedCell && cells[selectedCell].value) || undefined;
@@ -27,6 +28,7 @@ const Board = ({
           selectCell={selectCell}
           updateCell={updateCell}
           moveSelect={moveSelect}
+          conflict={conflicts[id] || false}
           tabIndex={index + 1}
         />
       ))}
@@ -40,6 +42,7 @@ Board.propTypes = {
   selectCell: PropTypes.func.isRequired,
   moveSelect: PropTypes.func.isRequired,
   updateCell: PropTypes.func.isRequired,
+  conflicts: PropTypes.object,
 };
 
 export default Board;

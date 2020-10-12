@@ -1,10 +1,10 @@
 import { useReducer, useMemo } from "react";
+import { NUMBERS } from "./utils";
 
 const initializeBoard = (prefill, fixed = true) => {
-  const numbers = Array.from(new Array(9), (_, idx) => idx + 1);
-  return numbers.reduce(
+  return NUMBERS.reduce(
     (board, r, i) =>
-      numbers.reduce((cells, c, j) => {
+      NUMBERS.reduce((cells, c, j) => {
         const value = (prefill && prefill[i] && prefill[i][j]) || null;
         const clue = value ? fixed : false;
         cells[`${r}${c}`] = { row: r, column: c, value, clue };

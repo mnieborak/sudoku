@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useBoard, useSelection, useMode } from "./sudoku";
+import { useBoard, useSelection, useMode, useConflicts } from "./sudoku";
 import Board from "./Board";
 import Controls from "./Controls";
 
@@ -9,6 +9,7 @@ const App = () => {
     cells,
     { updateCell, clearBoard, resetBoard, fixBoard, unfixBoard },
   ] = useBoard();
+  const conflicts = useConflicts(cells);
   const [selection, { selectCell, moveSelect }] = useSelection();
   const [mode, setMode] = useMode();
   return (
@@ -20,6 +21,7 @@ const App = () => {
         selectCell={selectCell}
         updateCell={updateCell}
         moveSelect={moveSelect}
+        conflicts={conflicts}
       />
       <Controls
         mode={mode}

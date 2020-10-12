@@ -1,9 +1,6 @@
 import { useReducer, useMemo } from "react";
+import { extractRowAndColumn, generateId } from "./utils";
 
-const extractRowAndColumn = (id) => {
-  const [row, column] = (id || "").split("").map((i) => parseInt(i));
-  return { row, column };
-};
 const increment = (i) => (i && i < 9 ? i + 1 : i);
 const decrement = (i) => (i && i > 1 ? i - 1 : i);
 
@@ -39,7 +36,7 @@ export const useSelection = () => {
     selectionReducer,
     initialSelection
   );
-  const cell = useMemo(() => `${row || ""}${column || ""}`, [row, column]);
+  const cell = useMemo(() => generateId({ row, column }), [row, column]);
   const actions = useMemo(
     () => ({
       selectCell: (id) => dispatch(selectCell(id)),
