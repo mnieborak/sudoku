@@ -7,7 +7,10 @@ import {
   MOVE_SELECT_DOWN,
   MOVE_SELECT_LEFT,
   MOVE_SELECT_RIGHT,
+  MODES,
+  MODE_SOLVING,
 } from "./sudoku";
+import Candidates from "./Candidates";
 
 class Cell extends PureComponent {
   constructor(props) {
@@ -60,6 +63,33 @@ class Cell extends PureComponent {
       case "c":
       case "9":
         return this.handleValueInput(9);
+      case "Q":
+      case "!":
+        return this.handleCandidateInput(1);
+      case "W":
+      case "@":
+        return this.handleCandidateInput(2);
+      case "E":
+      case "#":
+        return this.handleCandidateInput(3);
+      case "A":
+      case "$":
+        return this.handleCandidateInput(4);
+      case "S":
+      case "%":
+        return this.handleCandidateInput(5);
+      case "D":
+      case "^":
+        return this.handleCandidateInput(6);
+      case "Z":
+      case "&":
+        return this.handleCandidateInput(7);
+      case "X":
+      case "*":
+        return this.handleCandidateInput(8);
+      case "C":
+      case "(":
+        return this.handleCandidateInput(9);
       case "ArrowUp":
         return moveSelect(MOVE_SELECT_UP);
       case "ArrowDown":
@@ -74,7 +104,26 @@ class Cell extends PureComponent {
   handleValueInput = (newValue) => {
     const { fixed, id, updateCell, value } = this.props;
     if (!fixed) {
-      updateCell(id, { value: newValue === value ? null : newValue });
+      updateCell(id, {
+        value: newValue === value ? null : newValue,
+        candidates: [],
+      });
+    }
+  };
+
+  handleCandidateInput = (newValue) => {
+    const { mode, fixed, id, updateCell, candidates } = this.props;
+    if (!fixed && mode == MODE_SOLVING) {
+      let newCandidates;
+      if (candidates.includes(newValue)) {
+        newCandidates = candidates.filter((n) => n !== newValue);
+      } else {
+        newCandidates = candidates.concat(newValue);
+      }
+      updateCell(id, {
+        value: null,
+        candidates: newCandidates,
+      });
     }
   };
 
@@ -89,6 +138,7 @@ class Cell extends PureComponent {
     const {
       value,
       fixed,
+      candidates,
       selected,
       peer,
       same,
@@ -105,16 +155,22 @@ class Cell extends PureComponent {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
       >
-        <div className={classNames("value", { input: !fixed })}>{value}</div>
+        {value ? (
+          <div className={classNames("value", { input: !fixed })}>{value}</div>
+        ) : (
+          <Candidates candidates={candidates} />
+        )}
       </div>
     );
   }
 }
 
 Cell.propTypes = {
+  mode: PropTypes.oneOf(MODES).isRequired,
   id: PropTypes.string.isRequired,
   value: PropTypes.number,
   fixed: PropTypes.bool.isRequired,
+  candidates: PropTypes.array.isRequired,
   selected: PropTypes.bool.isRequired,
   peer: PropTypes.bool.isRequired,
   same: PropTypes.bool.isRequired,

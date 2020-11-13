@@ -16,6 +16,7 @@ const App = () => {
     <div className="app">
       <h1>Sudoku</h1>
       <Board
+        mode={mode}
         cells={cells}
         selection={selection}
         selectCell={selectCell}
