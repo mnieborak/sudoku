@@ -12,6 +12,8 @@ const Controls = ({
   unfixBoard,
   clearBoard,
   resetBoard,
+  updateCellCandidates,
+  updateAllCandidates,
 }) => {
   const handleClickPlay = useCallback(() => {
     setMode(MODE_SOLVING);
@@ -32,7 +34,12 @@ const Controls = ({
       );
     case MODE_SOLVING:
       return (
-        <SolvingControls onClickEdit={handleClickEdit} onReset={handleReset} />
+        <SolvingControls
+          onClickEdit={handleClickEdit}
+          onReset={handleReset}
+          onFindCandidates={updateCellCandidates}
+          onFindAllCandidates={updateAllCandidates}
+        />
       );
     default:
       return null;
@@ -46,6 +53,8 @@ Controls.propTypes = {
   unfixBoard: PropTypes.func.isRequired,
   clearBoard: PropTypes.func.isRequired,
   resetBoard: PropTypes.func.isRequired,
+  updateCellCandidates: PropTypes.func.isRequired,
+  updateAllCandidates: PropTypes.func.isRequired,
 };
 
 export default Controls;

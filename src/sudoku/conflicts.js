@@ -4,7 +4,6 @@ import { isPeer, generateId, inspectBoard } from "./utils";
 const findSamePeers = (cells) => {
   if (cells.length <= 1) return [];
   let unchecked = [...cells];
-  console.log(unchecked);
   let conflicted = [];
   while (unchecked.length > 0) {
     let first = unchecked.shift();

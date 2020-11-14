@@ -132,8 +132,6 @@ class Cell extends PureComponent {
     selectCell(id);
   };
 
-  handleBlur = () => this.props.selectCell(null);
-
   render() {
     const {
       value,
@@ -153,7 +151,6 @@ class Cell extends PureComponent {
         tabIndex={tabIndex}
         onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
       >
         {value ? (
           <div className={classNames("value", { input: !fixed })}>{value}</div>
